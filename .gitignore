@@ -1,0 +1,23 @@
+# Python
+server/venv/
+server/__pycache__/
+server/**/__pycache__/
+*.pyc
+
+# Environment files
+.env
+server/.env
+
+# Node
+client/node_modules/
+client/dist/
+
+# SQLite database
+server/instance/
+*.db
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
