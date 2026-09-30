@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Eventide brand palette - warm paper + two disciplined accents,
+   replacing the default zinc/orange/rose/amber/purple mix. */
+@theme {
+  --color-ink-50: #f7f5f2;
+  --color-ink-100: #efebe4;
+  --color-ink-200: #ded7cb;
+  --color-ink-300: #c3b9a8;
+  --color-ink-400: #a0947e;
+  --color-ink-500: #7d6f5b;
+  --color-ink-600: #5e5346;
+  --color-ink-700: #453d33;
+  --color-ink-800: #2e2822;
+  --color-ink-900: #1e1a16;
+  --color-ink-950: #120f0c;
+
+  --color-marigold-50: #fdf6e9;
+  --color-marigold-100: #fbeacb;
+  --color-marigold-200: #f6d693;
+  --color-marigold-300: #f0bd5c;
+  --color-marigold-400: #ebac3f;
+  --color-marigold-500: #e8a33d;
+  --color-marigold-600: #c98429;
+  --color-marigold-700: #a3671f;
+  --color-marigold-800: #7c4e18;
+  --color-marigold-900: #5c3a13;
+  --color-marigold-950: #3a250c;
+
+  --color-hibiscus-50: #fbeef0;
+  --color-hibiscus-100: #f5d3d8;
+  --color-hibiscus-200: #e8a7af;
+  --color-hibiscus-300: #d97985;
+  --color-hibiscus-400: #c4525f;
+  --color-hibiscus-500: #b23a48;
+  --color-hibiscus-600: #952f3b;
+  --color-hibiscus-700: #78252f;
+  --color-hibiscus-800: #5c1c24;
+  --color-hibiscus-900: #42151a;
+  --color-hibiscus-950: #290d10;
+
+  --color-savanna-400: #8ca578;
+  --color-savanna-500: #6f8f5b;
+  --color-savanna-600: #5b7b4f;
+  --color-savanna-700: #48623e;
+
+  --color-paper: #f6f1e7;
+  --color-paper-dim: #eee6d4;
+
+  /* Sharper corners than Tailwind's defaults - tickets, not SaaS cards */
+  --radius-2xl: 0.625rem;
+  --radius-3xl: 0.875rem;
+}
+
+:root {
+  --background: #f6f1e7;
+  --foreground: #1e1a16;
+}
+
+.dark {
+  --background: #120f0c;
+  --foreground: #f7f5f2;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.font-artistic {
+  font-family: var(--font-display), Impact, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+/* Ticket-stub motif: a die-cut notch + dashed perforation, used on event
+   cards in place of generic rounded-corner-and-shadow containers. */
+.ticket-notch {
+  position: relative;
+}
+.ticket-notch::before,
+.ticket-notch::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  width: 18px;
+  height: 18px;
+  background: var(--background);
+  border: 1px solid var(--tw-ticket-border, var(--color-ink-200));
+  border-radius: 9999px;
+  z-index: 1;
+}
+.ticket-notch::before {
+  top: -9px;
+}
+.ticket-notch::after {
+  bottom: -9px;
+}
+.ticket-perforation {
+  border-top: 1.5px dashed var(--color-ink-300);
+}
+.dark .ticket-perforation {
+  border-top-color: var(--color-ink-700);
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.5)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 14px rgba(249, 115, 22, 0.9)); }
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.08) translate(-1%, -1%);
+  }
+  100% {
+    transform: scale(1.15) translate(0, 0);
+  }
+}
+
+@keyframes progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+}
+
+.animate-float-subtle {
+  animation: float-subtle 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+.animate-kenburns {
+  animation: kenburns 8s ease-in-out infinite alternate;
+}
+
+.animate-progress {
+  animation: progress 3s linear forwards;
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 90s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
